@@ -1,3 +1,7 @@
+import Button from '@material-ui/core/Button';
+import FaceIcon from '@material-ui/icons/Face';
+
+import SignIn from './components/SignIn'
 import logo from './logo.svg';
 import './App.css';
 
@@ -5,7 +9,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <div className="App-logo" alt="logo">
+          <FaceIcon style={{ fontSize: 200 }}/>
+        </div>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -18,6 +24,10 @@ function App() {
           Learn React
         </a>
       </header>
+      <SignIn />
+      <Button variant="contained" color="primary">
+        Signup
+      </Button>
     </div>
   );
 }
