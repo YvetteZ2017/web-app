@@ -1,0 +1,193 @@
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    /* height: 5vmin; */
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  .Home-btn {
+    max-width: 50vw;
+    color: white;
+  }
+  
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .App-link {
+    color: white;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .site-nav {
+    background-color: #cccccc;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out
+}
+
+.menu-opened .site-nav {
+    opacity: 1;
+    z-index: 100
+}
+
+.site-nav li {
+    margin: .9375rem 0
+}
+
+.site-nav a {
+    color: #000;
+    font-weight: 700
+}
+
+.site-nav a:hover {
+    color: #f50856
+}
+
+@media screen and (min-width:40em) {
+    .site-nav a {
+        font-size: 2.5rem
+    }
+}
+
+@media screen and (min-width:64em) {
+    .site-nav a {
+        font-size: 3.125rem
+    }
+}
+
+.btn-menu {
+    background: none;
+    width: 30px;
+    height: 19px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    padding: 0;
+    right: 1.25rem;
+    top: 1.25rem;
+    z-index: 200;
+    text-indent: -999em
+}
+
+.btn-menu span,
+.btn-menu span:after,
+.btn-menu span:before {
+    cursor: pointer;
+    width: 30px;
+    height: 3px
+}
+
+.btn-menu span {
+    display: block;
+    position: relative;
+    background: #cccccc;
+    -webkit-transition: all 0ms .3s;
+    transition: all 0ms .3s
+}
+
+.btn-menu span:before {
+    bottom: 8px;
+    -webkit-transition: bottom .3s cubic-bezier(.23, 1, .32, 1) .3s, -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
+    transition: bottom .3s cubic-bezier(.23, 1, .32, 1) .3s, -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
+    transition: bottom .3s cubic-bezier(.23, 1, .32, 1) .3s, transform .3s cubic-bezier(.23, 1, .32, 1);
+    transition: bottom .3s cubic-bezier(.23, 1, .32, 1) .3s, transform .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1)
+}
+
+.btn-menu span:after,
+.btn-menu span:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    background:  #cccccc;
+}
+
+.btn-menu span:after {
+    top: 8px;
+    -webkit-transition: top .3s cubic-bezier(.23, 1, .32, 1) .3s, -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
+    transition: top .3s cubic-bezier(.23, 1, .32, 1) .3s, -webkit-transform .3s cubic-bezier(.23, 1, .32, 1);
+    transition: top .3s cubic-bezier(.23, 1, .32, 1) .3s, transform .3s cubic-bezier(.23, 1, .32, 1);
+    transition: top .3s cubic-bezier(.23, 1, .32, 1) .3s, transform .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1)
+}
+
+.menu-opened .btn-menu span {
+    background: hsla(0, 0%, 100%, 0)
+}
+
+.menu-opened .btn-menu span:after {
+    background: #000;
+    top: 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transition: top .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1) .3s;
+    transition: top .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1) .3s;
+    transition: top .3s cubic-bezier(.23, 1, .32, 1), transform .3s cubic-bezier(.23, 1, .32, 1) .3s;
+    transition: top .3s cubic-bezier(.23, 1, .32, 1), transform .3s cubic-bezier(.23, 1, .32, 1) .3s, -webkit-transform .3s cubic-bezier(.23, 1, .32, 1) .3s
+}
+
+.menu-opened .btn-menu span:before {
+    background: #000;
+    bottom: 0;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transition: bottom .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1) .3s;
+    transition: bottom .3s cubic-bezier(.23, 1, .32, 1), -webkit-transform .3s cubic-bezier(.23, 1, .32, 1) .3s;
+    transition: bottom .3s cubic-bezier(.23, 1, .32, 1), transform .3s cubic-bezier(.23, 1, .32, 1) .3s;
+    transition: bottom .3s cubic-bezier(.23, 1, .32, 1), transform .3s cubic-bezier(.23, 1, .32, 1) .3s, -webkit-transform .3s cubic-bezier(.23, 1, .32, 1) .3s
+}
+
+input.valid {
+  border-bottom: 2px solid white;
+}
+
+input.invalid {
+  border-bottom: 2px solid red;
+}
