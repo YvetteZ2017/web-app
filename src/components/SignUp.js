@@ -167,6 +167,21 @@ class SignUp extends React.Component {
                             onChange={(e) => this.onPasswordChanged(e)}
                         />
                         </Grid>
+                        <Grid item xs={12}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            id="password"
+                            className={isValidConfirmation?'valid':'invalid'} 
+                            type="password" 
+                            placeholder="Confirm Password" 
+                            value={this.state.confirm} 
+                            onChange={(e) => this.onConfirmationChanged(e)}
+                        />
+                        </Grid>
                     </Grid>
                     <Button
                         type="submit"

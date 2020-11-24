@@ -1,5 +1,6 @@
-import FaceIcon from '@material-ui/icons/Face';
-// import { SignIn, SignUp } from './components';
+import NavBar from '../components/NavBar';
+import Upload from '../components/Upload';
+import Inputs from '../components/Inputs';
 
 import '../css/app.css';
 
@@ -7,12 +8,9 @@ function FaceApp() {
   return (
     <div className="App">
       <header className="App-header">
-        <div className="App-logo" alt="logo">
-          <FaceIcon style={{ fontSize: 200 }}/>
-        </div>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+      <NavBar />  
+      <Upload />
+      <Inputs />
       </header>
     </div>
   );

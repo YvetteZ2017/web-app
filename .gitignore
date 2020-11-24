@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 app_info
+face_service/met_objects.py
+face_service/my-deployment-package.zip

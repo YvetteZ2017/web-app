@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import { Provider } from 'react-redux'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Amplify from 'aws-amplify';
 
 import awsConfig from './config';
+// import store from './store'
 import { Home, FaceApp, SignInPage, SignUpPage } from './pages';
 import './css/index.css';
+
 
 Amplify.configure(awsConfig);
 
@@ -24,16 +27,29 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/signup" component={SignUpPage} />
-          <Route path="/signin" component={SignInPage} />
-          <PrivateRoute path="/app" component={FaceApp} />
-        </Switch>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route path="/signup" component={SignUpPage} />
+            <Route path="/signin" component={SignInPage} />
+            <PrivateRoute path="/app" component={FaceApp} />
+          </Switch>
+        </BrowserRouter>
     );
   }
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
+// return (
+//   <Provider store={store}>
+//     <BrowserRouter>
+//       <Switch>
+//         <Route exact path="/" component={Home}/>
+//         <Route path="/signup" component={SignUpPage} />
+//         <Route path="/signin" component={SignInPage} />
+//         <PrivateRoute path="/app" component={FaceApp} />
+//       </Switch>
+//     </BrowserRouter>
+//   </Provider>
+// );

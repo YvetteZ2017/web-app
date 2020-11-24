@@ -5,6 +5,8 @@ const List = () => {
     const pages = [
         { url: '/', title: 'Home' },
         { url: '/app', title: 'App' },
+        { url: '/signin', title: 'Signin' },
+        { url: '/signup', title: 'Signup' },
     ];
 
     return (
