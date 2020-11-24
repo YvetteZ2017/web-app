@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 });
 
 const InputItem = (props) => {
-  // const input = props.input
+   // const input = props.input
   const classes = useStyles();
 
   return (
