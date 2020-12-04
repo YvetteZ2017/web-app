@@ -1,11 +1,13 @@
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
+from flask-lambda import FlaskLambda
 import os
 import requests
 import uuid
 from decimal import Decimal
 import json
 
+app = FlaskLambda(__name__)
 
 # input_bucket = os.environ['INPUT_BUCKET']
 # collection_id = os.environ['COLLECTION_ID']
@@ -152,6 +154,19 @@ def list_inputs_handler(event, context):
     else:
         print('### found no inputs')
 
+@app.route('/inputs', methods=['GET', 'POST'])
+def foo():
+    data = {
+        'form': request.form.copy(),
+        'args': request.args.copy(),
+        'json': request.json
+    }
+    return (
+        json.dumps(data, indent=4, sort_keys=True),
+        200,
+        {'Content-Type': 'application/json'}
+    )
+
 # def main():
 #     event = {'user_id': 'test_user_id','id': '5c6381bc-f885-4928-946c-353eff0cf0f2'}
 #     # event = {'url': 'https://www.saltwire.com/media/photologue/photos/cache/not-a-billionaire-but-kylie-jenner-is-highest-paid-celebrity-forbes-says_large'}
@@ -159,3 +174,6 @@ def list_inputs_handler(event, context):
 
 # if __name__ == "__main__":
 #     main() 
+
+if __name__ == '__main__':
+    app.run(debug=True)

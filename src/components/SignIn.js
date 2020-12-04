@@ -190,70 +190,70 @@ class SignIn extends React.Component {
 	  const { classes } = this.props;
 
     return (
-	  <Container component="main" maxWidth="xs">
-	  <CssBaseline />
-	  <div className={classes.paper}>
-		<Avatar className={classes.avatar}>
-		  <LockOutlinedIcon />
-		</Avatar>
-		<Typography component="h1" variant="h5">
-		Enter MFA Code
-		</Typography>
-		<form className={classes.form} noValidate id="verifyForm" onSubmit={(e) => this.onSubmitVerification(e)}>
-		  <TextField
-			variant="outlined"
-			margin="normal"
-			required
-			fullWidth
-			id="email"
-			label="Email Address"
-			name="email"
-			autoComplete="email"
-			autoFocus
-			className={isValidEmail?'valid':'invalid'}
-			placeholder="Email" 
-			value={this.state.email}
-			onChange={(e) => this.onEmailChanged(e)}
-		  />
-		  <TextField
-			variant="outlined"
-			margin="normal"
-			required
-			fullWidth
-			name="code"
-			label="Verification Code"
-			id="code"
-			className={isValidCode?'valid':'invalid'} 
-			type="text" 
-			placeholder="Verification Code" 
-			value={this.state.code} 
-			onChange={(e) => this.onCodeChanged(e)}
-		  />
-		  <Button
-			type="submit"
-			fullWidth
-			variant="contained"
-			color="primary"
-			className={classes.submit}
-			disabled={!(isValidCode&&isValidEmail)}
-		  >
-			Sign In
-		  </Button>
-		  <Grid container>
-			<Grid item xs>
-			  <Link href="#" variant="body2">
-				Forgot password?
-			  </Link>
-			</Grid>
-			<Grid item>
-			  <Link href="#" variant="body2">
-				{"Don't have an account? Sign Up"}
-			  </Link>
-			</Grid>
-		  </Grid>
-		</form>
-	  </div>
-		</Container>
+        <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+            Enter MFA Code
+            </Typography>
+            <form className={classes.form} noValidate id="verifyForm" onSubmit={(e) => this.onSubmitVerification(e)}>
+            <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                className={isValidEmail?'valid':'invalid'}
+                placeholder="Email" 
+                value={this.state.email}
+                onChange={(e) => this.onEmailChanged(e)}
+            />
+            <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="code"
+                label="Verification Code"
+                id="code"
+                className={isValidCode?'valid':'invalid'} 
+                type="text" 
+                placeholder="Verification Code" 
+                value={this.state.code} 
+                onChange={(e) => this.onCodeChanged(e)}
+            />
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                disabled={!(isValidCode&&isValidEmail)}
+            >
+                Sign In
+            </Button>
+            <Grid container>
+                <Grid item xs>
+                <Link href="#" variant="body2">
+                    Forgot password?
+                </Link>
+                </Grid>
+                <Grid item>
+                <Link href="#" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                </Link>
+                </Grid>
+            </Grid>
+            </form>
+        </div>
+        </Container>
     );
   }
 
@@ -268,4 +268,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true})(withRouter(SignIn));
+export default withStyles(styles, { withTheme: true })(withRouter(SignIn));

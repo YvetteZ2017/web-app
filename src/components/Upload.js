@@ -119,11 +119,11 @@ class Upload extends React.Component {
                              />
                         
                         <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
                         >Upload</Button>
                     </form>
                 </Grid>

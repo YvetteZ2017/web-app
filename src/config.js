@@ -9,7 +9,7 @@ const awsConfig = {
         endpoints: [
             {
                 name: 'FaceAppAPI',
-                endpoint: 'https://ytmkle1u45.execute-api.us-east-1.amazonaws.com/prod',
+                endpoint: 'https://ytmkle1u45.execute-api.us-east-1.amazonaws.com/prod/inputs',
                 region: 'us-west-1'
             }
         ]
