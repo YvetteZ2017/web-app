@@ -7,7 +7,6 @@ import Amplify from 'aws-amplify';
 import awsConfig from './config';
 import store from './store'
 import { Home, FaceApp, SignInPage, SignUpPage } from './pages';
-import SingleInput from './components/SingleInput';
 
 import './css/index.css';
 
@@ -37,7 +36,6 @@ class App extends React.Component {
             <Route path="/signup" component={SignUpPage} />
             <Route path="/signin" component={SignInPage} />
             <PrivateRoute path="/app" component={FaceApp} />
-            <PrivateRoute path="/inputs/:inputId" component={SingleInput} />
           </Switch>
         </BrowserRouter>
       </Provider>
