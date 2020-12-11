@@ -1,5 +1,7 @@
 import React from 'react';
 // import { Auth } from 'aws-amplify';
+import { connect } from 'react-redux';
+import { postInput } from "../store";
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -8,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
 import '../css/app.css'
+
 
 const styles = theme => ({
     root: {
@@ -66,14 +69,17 @@ class Upload extends React.Component {
     async onSubmitForm(e) {
         e.preventDefault();
         try {
-            this.setState({ url: '', matchUrl:''});
+            await this.props.handleSubmit(e)
+
         } catch (err) {
             alert(err.message);
             console.error(err);
         }
+        this.setState({ url: '', matchUrl:''});
     }
 
     onUrlChanged(e) {
+        e.preventDefault();
         this.setState({ 
             url: e.target.value,
          });
@@ -81,28 +87,27 @@ class Upload extends React.Component {
 
     render() {
         const { classes } = this.props;
-
+        const url = this.state.url
+        const matchUrl = this.state.matchUrl
         return (
 
             <Grid container className={classes.root} spacing={2}>
                 <Grid item xs={12}>
                     <Grid container justify="center" spacing={1}>
-                    
                         <Grid item>
                         <CardMedia
                             className={classes.media}
-                            image="https://artworkfaces.s3.amazonaws.com/436063"
+                            image={ url }
                             title="Input Image"
                         />
                         </Grid>
                         <Grid item>
                         <CardMedia
                             className={classes.media}
-                            image="https://artworkfaces.s3.amazonaws.com/436063"
+                            image={ matchUrl }
                             title="Match Image"
                         />
                         </Grid>
-                    
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
@@ -133,5 +138,23 @@ class Upload extends React.Component {
     }
 }
 
+const mapStatesToProps = (state) => (
+    {
+        userId: state.userId,
+        inputs: state.inputs
+    }
+)
 
-export default withStyles(styles, { withTheme: true})(Upload);
+
+const mapDispatchToProps = function (dispatch, ownProps) {
+    return {
+        handleSubmit (event) {
+            event.preventDefault();
+            let userId = localStorage.getItem('userId')
+            const url = event.target.url.value;
+            dispatch(postInput(userId, url));
+        }
+    };
+};
+
+export default withStyles(styles, { withTheme: true})(connect(mapStatesToProps, mapDispatchToProps)(Upload));

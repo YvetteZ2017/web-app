@@ -1,8 +1,11 @@
-import { React, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchInput } from '../store';
 // import { Auth } from 'aws-amplify';
+import awsConfig from '../config';
+import axios from 'axios';
+
 
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -15,6 +18,8 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
 
+const apiPath = awsConfig.API.endpoints[0].endpoint
+
 const styles = theme => ({
 	root: {
 		maxWidth: 345,
@@ -23,6 +28,12 @@ const styles = theme => ({
 		height: 140,
 	},
 });
+
+async function getInputItem (userId, inputId) {
+	let input =  await axios.get(`${apiPath}/${inputId}`, {data: {user_id: userId}})
+		.then(res => (res.data));
+	return input
+}
 
 class SingleInput extends Component {
 	constructor(props) {
@@ -33,8 +44,8 @@ class SingleInput extends Component {
 	}
 
 	async componentDidMount() {
-		const input = this.props.getInput();
-		// const session = await Auth.currentSession();
+		const input = await getInputItem();
+
 		this.setState({ input: input });
 	}
 
@@ -88,12 +99,21 @@ class SingleInput extends Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const userId = ownProps.userId;
+  const inputId = ownProps.match.params.inputId;
   return {
       getInput (event) {
           event.stopPropagation();
-          dispatch(fetchInput(input.id))
+          dispatch(fetchInput(userId, inputId))
       }
   }
 }
 
-export default withStyles(styles, { withTheme: true })(withRouter(connect(null, mapDispatchToProps)(SingleInput)));
+const mapStatesToProps = (state, ownProps) => {
+	const inputId = Number(ownProps.match.params.inputId);
+	return {
+		userId: state.userId,
+		input: state.inputs.find(input => input.id === inputId),
+	}
+}
+
+export default withStyles(styles, { withTheme: true })(withRouter(connect(mapStatesToProps, mapDispatchToProps)(SingleInput)));

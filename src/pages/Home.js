@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
+
 import FaceIcon from '@material-ui/icons/Face';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-
 import NavBar from '../components/NavBar';
+
 import '../css/app.css';
+
 
 const useStyles = makeStyles((theme) => ({
     submit: {

@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Auth } from 'aws-amplify';
+import { getUserId } from '../store';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -54,14 +56,15 @@ class SignIn extends React.Component {
           this.state.email.replace(/[@.]/g, '|'),
           this.state.password
         );
-        console.log('userObject', userObject);
+        this.props.addUser(userObject['username']);
+        localStorage.setItem('userId', userObject['username'])
         if (userObject.challengeName) {
           // Auth challenges are pending prior to token issuance
           this.setState({ userObject, stage: 1 });
         } else {
           // No remaining auth challenges need to be satisfied
           const session = await Auth.currentSession();
-          // console.log('Cognito User Access Token:', session.getAccessToken().getJwtToken());
+          console.log('Cognito User Access Token:', session);
           console.log('Cognito User Identity Token:', session.getIdToken().getJwtToken());
           // console.log('Cognito User Refresh Token', session.getRefreshToken().getToken());
           this.setState({ stage: 0, email: '', password: '', code: '' });
@@ -268,4 +271,12 @@ class SignIn extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(withRouter(SignIn));
+const mapDispatchToProps = function (dispatch, ownProps) {
+    return {
+        addUser (userId) {
+            dispatch(getUserId(userId));
+        }
+    };
+};
+
+export default connect(null, mapDispatchToProps)(withStyles(styles, { withTheme: true })(withRouter(SignIn)));
