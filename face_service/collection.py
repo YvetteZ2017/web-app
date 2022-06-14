@@ -2,8 +2,7 @@ import boto3
 import requests
 from decimal import Decimal
 import json
-
-import met_objects
+import uuid
 
 
 def create_collection(collection_id):
@@ -118,9 +117,12 @@ def load_objects(collection_id, bucket):
     assets_table = dynamodb.Table('assets')
     metadata_table = dynamodb.Table('metadata')
 
-    objects = met_objects.objects
+    f = open('met_object.json')
+    data = json.load(f)
+    objects = data["objects"]
+    object_ids = list(dict.fromkeys(objects))
     try:
-        for o in objects:
+        for o in object_ids:
             o_name = str(o)
             print("## object: " + o_name)
             o_url = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/' + o_name
@@ -154,21 +156,37 @@ def load_objects(collection_id, bucket):
                 asset_item['bounding_box'] = json.loads(json.dumps(faceRecord['Face']['BoundingBox']), parse_float=Decimal)
                 assets_table.put_item(Item=asset_item)
 
+
     except Exception as e:
         print("## Uploading to S3 failed.")
-        raise e 
+
+    f.close()
     return
-        
+
+
+def match_faces(collection_id, bucket, input_url):
+    input_image_id = str(uuid.uuid4())
+    input_s3_path = 'test_user_id' + '/' + input_image_id
+    upload_to_s3_bucket(bucket, input_url, input_s3_path)
+    client=boto3.client('rekognition')
+    response=client.search_faces_by_image(CollectionId=collection_id,
+                                          Image={'S3Object': {'Bucket': bucket, 'Name': input_s3_path}},
+                                          FaceMatchThreshold=0,
+                                          MaxFaces=1)
+
+    face_matches = response['FaceMatches']
+    print('### face matches: ', face_matches)
+
 
 def main():
-    collection_id='ArtWorkFacesCollection'
+    # collection_id='ArtWorkFacesCollection'
     # create_collection(collection_id)
 
     # collection_count=list_collections()
     # print("collections: " + str(collection_count))
 
     bucket='artworkfaces'
-    # collection_id='ArtWorkFacesCollection'
+    collection_id='ArtWorkFacesCollection'
 
     # bucket='userinputs'
     # photo='original.jpg'
@@ -179,12 +197,14 @@ def main():
     # faces=[]
     # faces_count=delete_faces_from_collection(collection_id, faces)
     # print("deleted faces count: " + str(faces_count))
-
+    #
     # search(collection_id, bucket, photo)
-
+    #
     # list_collection_faces(collection_id)
-
+    #
     # load_objects(collection_id, bucket)
+    image_url = 'https://www.thefamouspeople.com/profiles/thumbs/hiroyuki-sanada-1.jpg'
+    match_faces(collection_id, 'userinputs', image_url)
 
 
 if __name__ == "__main__":

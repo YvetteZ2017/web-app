@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import NavBar from '../components/NavBar';
-import Upload from '../components/Upload';
+import NewUpload from '../components/UploadNew';
 import Inputs from '../components/Inputs';
 import '../css/app.css';
 import store, {fetchInputs} from "../store";
@@ -51,7 +51,7 @@ class FaceApp extends Component {
             <div className="App">
                 <header className="App-header">
                     <NavBar />
-                    <Upload />
+                    <NewUpload />
                     <Inputs />
                     <a href="url">hello</a>
                 </header>
